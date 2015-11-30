@@ -104,6 +104,7 @@
 
 #define DSX_VBUS_VTG_MIN_VN1 1850000
 #define DSX_VBUS_VTG_MAX_VN1 1850000
+
 static bool wakeup_gesture_changed = false;
 static bool wakeup_gesture_temp;
 
@@ -189,7 +190,6 @@ bool scr_suspended(void)
 	return rmi4_data->suspend;
 }
 #endif
-
 
 struct synaptics_rmi4_f01_device_status {
 	union {
@@ -761,18 +761,9 @@ static ssize_t synaptics_rmi4_wake_gesture_store(struct device *dev,
 	if (sscanf(buf, "%u", &input) != 1)
 		return -EINVAL;
 
-	if (rmi4_data->suspend) {
-		dev_err(rmi4_data->pdev->dev.parent,
-				"%s:Wake_gesture can not operate when the system is suspended\n",
-				__func__);
-		return -EINVAL;
-	}
-
 	input = input > 0 ? 1 : 0;
 
-
-
-if (rmi4_data->f11_wakeup_gesture || rmi4_data->f12_wakeup_gesture) {
+	if (rmi4_data->f11_wakeup_gesture || rmi4_data->f12_wakeup_gesture) {
 		if (rmi4_data->suspend) { 
 			wakeup_gesture_changed = true;
 			wakeup_gesture_temp = input;
@@ -840,10 +831,9 @@ static int synaptics_rmi4_f11_abs_report(struct synaptics_rmi4_data *rmi4_data,
 
 	extra_data = (struct synaptics_rmi4_f11_extra_data *)fhandler->extra;
 
-ifdef CONFIG_WAKE_GESTURES
+#ifdef CONFIG_WAKE_GESTURES
 	if (rmi4_data->suspend && rmi4_data->enable_wakeup_gesture && !s2w_switch) {
 #else
-
 	if (rmi4_data->suspend && rmi4_data->enable_wakeup_gesture) {
 #endif
 		retval = synaptics_rmi4_reg_read(rmi4_data,
@@ -3883,7 +3873,7 @@ static void synaptics_rmi4_f12_wg(struct synaptics_rmi4_data *rmi4_data,
 		rmi4_data->gesture_sleep = false;
 		disable_irq_wake(rmi4_data->irq);
 		dev_info(rmi4_data->pdev->dev.parent,
-				"%s: exist gesture mode\n", __func__);
+				"%s: exist gesture mode\n",	__func__);
 	}
 
 	return;
@@ -3983,7 +3973,6 @@ static void synaptics_rmi4_s2w_mode(struct synaptics_rmi4_data *rmi4_data,
 
 	return;
 }
-
 
 static void synaptics_rmi4_sensor_sleep(struct synaptics_rmi4_data *rmi4_data)
 {
@@ -4155,11 +4144,6 @@ static void synaptics_rmi4_late_resume(struct early_suspend *h)
 exit:
 	rmi4_data->suspend = false;
 
-	if (wakeup_gesture_changed) {
-		rmi4_data->enable_wakeup_gesture = wakeup_gesture_temp;
-		wakeup_gesture_changed = false;
-	}
-
 	return;
 }
 #endif
@@ -4242,15 +4226,15 @@ static int synaptics_rmi4_resume(struct device *dev)
 exit:
 	rmi4_data->suspend = false;
 
-if (wakeup_gesture_changed) {
+	if (wakeup_gesture_changed) {
 #ifdef CONFIG_WAKE_GESTURES
 		if (s2w_switch_temp == 0)
 			dt2w_switch = wakeup_gesture_temp;
 		s2w_switch = s2w_switch_temp;
 #endif
- 		rmi4_data->enable_wakeup_gesture = wakeup_gesture_temp;
- 		wakeup_gesture_changed = false;
- 	}
+		rmi4_data->enable_wakeup_gesture = wakeup_gesture_temp;
+		wakeup_gesture_changed = false;
+	}
 
 	return 0;
 }

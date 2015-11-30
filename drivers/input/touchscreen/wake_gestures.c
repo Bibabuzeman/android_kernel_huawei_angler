@@ -178,7 +178,7 @@ static void new_touch(int x, int y) {
 	tap_time_pre = jiffies;
 	x_pre = x;
 	y_pre = y;
-	touch_nr;
+	touch_nr++;
 	wake_lock_timeout(&dt2w_wakelock, HZ/2);
 }
 
@@ -203,7 +203,7 @@ static void detect_doubletap2wake(int x, int y, bool st)
 			if ((calc_feather(x, x_pre) < DT2W_FEATHER) &&
 			    (calc_feather(y, y_pre) < DT2W_FEATHER) &&
 			    ((jiffies-tap_time_pre) < DT2W_TIME))
-				touch_nr;
+				touch_nr++;
 			else {
 				doubletap2wake_reset();
 				new_touch(x, y);
@@ -295,16 +295,16 @@ static void detect_sweep2wake_v(int x, int y, bool st)
 	//sweep down
 	} else if (firsty <= SWEEP_Y_START && single_touch && s2w_switch & SWEEP_DOWN) {
 		prevy = firsty;
-		nexty = prevy  SWEEP_Y_NEXT;
+		nexty = prevy + SWEEP_Y_NEXT;
 		if (barriery[0] == true || (y > prevy && y < nexty)) {
 			prevy = nexty;
-			nexty = SWEEP_Y_NEXT;
+			nexty += SWEEP_Y_NEXT;
 			barriery[0] = true;
 			if (barriery[1] == true || (y > prevy && y < nexty)) {
 				prevy = nexty;
 				barriery[1] = true;
 				if (y > prevy) {
-					if (y > (nexty  SWEEP_Y_NEXT)) {
+					if (y > (nexty + SWEEP_Y_NEXT)) {
 						if (exec_county && (jiffies - firsty_time < SWEEP_TIMEOUT)) {
 #if (WAKE_GESTURES_ENABLED)
 							if (gestures_switch) {
@@ -548,7 +548,7 @@ static ssize_t sweep2wake_show(struct device *dev,
 {
 	size_t count = 0;
 
-	count = sprintf(buf, "%d\n", s2w_switch);
+	count += sprintf(buf, "%d\n", s2w_switch);
 
 	return count;
 }
@@ -579,7 +579,7 @@ static ssize_t sweep2sleep_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
 	size_t count = 0;
-	count = sprintf(buf, "%d\n", s2s_switch);
+	count += sprintf(buf, "%d\n", s2s_switch);
 	return count;
 }
 
@@ -601,7 +601,7 @@ static ssize_t doubletap2wake_show(struct device *dev,
 {
 	size_t count = 0;
 
-	count = sprintf(buf, "%d\n", dt2w_switch);
+	count += sprintf(buf, "%d\n", dt2w_switch);
 
 	return count;
 }
@@ -631,7 +631,7 @@ static ssize_t wake_gestures_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
 	size_t count = 0;
-	count = sprintf(buf, "%d\n", gestures_switch);
+	count += sprintf(buf, "%d\n", gestures_switch);
 	return count;
 }
 static ssize_t wake_gestures_dump(struct device *dev,
@@ -651,7 +651,7 @@ static ssize_t vib_strength_show(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
 	size_t count = 0;
-	count = sprintf(buf, "%d\n", vib_strength);
+	count += sprintf(buf, "%d\n", vib_strength);
 	return count;
 }
 
