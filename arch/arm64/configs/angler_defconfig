@@ -1,4 +1,24 @@
 #
+# General setup
+#
+CONFIG_INIT_ENV_ARG_LIMIT=32
+CONFIG_CROSS_COMPILE="*/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-"
+CONFIG_LOCALVERSION="-Buzzerkernel-0.2"
+# CONFIG_LOCALVERSION_AUTO is not set
+CONFIG_DEFAULT_HOSTNAME="(none)"
+# CONFIG_SWAP is not set
+CONFIG_SYSVIPC=y
+CONFIG_SYSVIPC_SYSCTL=y
+# CONFIG_POSIX_MQUEUE is not set
+# CONFIG_FHANDLE is not set
+CONFIG_AUDIT=y
+# CONFIG_AUDIT_LOGINUID_IMMUTABLE is not set
+
+#ETC
+CONFIG_LCD_NOTIFIER=y
+CONFIG_THUNDERPLUG_CONTROL=y
+
+#
 # Automatically generated file; DO NOT EDIT.
 # Linux/arm64 3.10.74 Kernel Configuration
 #
@@ -31,25 +51,6 @@ CONFIG_DEFCONFIG_LIST="/lib/modules/$UNAME_RELEASE/.config"
 CONFIG_IRQ_WORK=y
 CONFIG_BUILDTIME_EXTABLE_SORT=y
 
-#
-# General setup
-#
-CONFIG_INIT_ENV_ARG_LIMIT=32
-CONFIG_CROSS_COMPILE="*/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-"
-CONFIG_LOCALVERSION="-Buzzerkernel-0.2"
-# CONFIG_LOCALVERSION_AUTO is not set
-CONFIG_DEFAULT_HOSTNAME="(none)"
-# CONFIG_SWAP is not set
-CONFIG_SYSVIPC=y
-CONFIG_SYSVIPC_SYSCTL=y
-# CONFIG_POSIX_MQUEUE is not set
-# CONFIG_FHANDLE is not set
-CONFIG_AUDIT=y
-# CONFIG_AUDIT_LOGINUID_IMMUTABLE is not set
-
-#ETC
-CONFIG_LCD_NOTIFIER=y
-CONFIG_THUNDERPLUG_CONTROL=y
 
 #
 # IRQ subsystem
