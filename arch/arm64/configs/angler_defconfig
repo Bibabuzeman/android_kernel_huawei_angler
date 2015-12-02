@@ -3987,12 +3987,4 @@ CONFIG_OID_REGISTRY=y
 CONFIG_QMI_ENCDEC=y
 # CONFIG_QMI_ENCDEC_DEBUG is not set
 CONFIG_STRICT_MEMORY_RWX=y
-<<<<<<< HEAD
-=======
 
-# Additions
-CONFIG_CPU_FREQ_GOV_ELEMENTALX=y
-CONFIG_FB_MSM_MDSS_KCAL_CTRL=y
-CONFIG_LOCALVERSION="-FechdaKernel-0.1"
-CONFIG_STATE_NOTIFIER=y
->>>>>>> 1f2760a... state_notifier: added new driver for on/off operations
