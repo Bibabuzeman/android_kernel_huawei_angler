@@ -3,7 +3,7 @@
 #
 CONFIG_INIT_ENV_ARG_LIMIT=32
 CONFIG_CROSS_COMPILE="*/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-"
-CONFIG_LOCALVERSION="-Buzzerkernel-0.2"
+CONFIG_LOCALVERSION="-buZZerKernel-0.3"
 # CONFIG_LOCALVERSION_AUTO is not set
 CONFIG_DEFAULT_HOSTNAME="(none)"
 # CONFIG_SWAP is not set
