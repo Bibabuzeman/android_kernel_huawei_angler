@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #
 # General setup
 #
@@ -11,6 +12,8 @@ CONFIG_SYSVIPC=y
 CONFIG_SYSVIPC_SYSCTL=y
 # CONFIG_POSIX_MQUEUE is not set
 # CONFIG_FHANDLE is not set
+=======
+>>>>>>> 955ac9e... Merge branch 'android-msm-angler-3.10-marshmallow-dr' into ak-aosp-6.0.1-staging
 CONFIG_AUDIT=y
 # CONFIG_AUDIT_LOGINUID_IMMUTABLE is not set
 
@@ -122,8 +125,11 @@ CONFIG_SCHED_HMP=y
 # CONFIG_CHECKPOINT_RESTORE is not set
 CONFIG_NAMESPACES=y
 # CONFIG_UTS_NS is not set
+<<<<<<< HEAD
 # CONFIG_IPC_NS is not set
 # CONFIG_USER_NS is not set
+=======
+>>>>>>> 955ac9e... Merge branch 'android-msm-angler-3.10-marshmallow-dr' into ak-aosp-6.0.1-staging
 # CONFIG_PID_NS is not set
 CONFIG_NET_NS=y
 CONFIG_UIDGID_CONVERTED=y
